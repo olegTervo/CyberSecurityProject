@@ -1,0 +1,11 @@
+.vscode
+.DS_Store
+.pytest_cache
+__pycache__
+*.py[cod]
+*$py.class
+*tmp
+venv
+*.log
+local_settings.py
+db.sqlite3
