@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	    <title>Notebook</title>
+    </head>
+
+{% if user.is_authenticated %}
+    <body>
+	<h1>{{user.username}} notes</h1>
+
+        <table>
+		<tr>
+		<th style="text-align:left">Username: <td>{{user.username}} 
+		</table>
+
+
+        <form action='/logout/' method="POST">
+			{% csrf_token %}
+            <input type="submit" value="Logout"/>
+        </form>
+		
+        <h2>Your notes</h2>
+
+		<ul>
+		{% for a in notes %}
+
+		<li>{{a.body}}
+		</li>
+
+		{% endfor %}
+		</ul>
+
+
+        <h2>Create a new note</h2>
+
+        <form action='add/' method="POST">
+            {% csrf_token %}
+
+			<input type="text" name="body"/><br/>
+            <input type="submit" value="Send"/>
+        </form>
+    </body>
+
+{% else %}
+    <body>
+	<form action='/login/'>
+	    <input type="submit" value="Login" />
+	</form>
+	<form action='/signup/'>
+	    <input type="submit" value="Create account" />
+	</form>
+    </body>
+{% endif %}
+</html>
