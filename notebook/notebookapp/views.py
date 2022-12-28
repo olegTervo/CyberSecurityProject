@@ -1,10 +1,10 @@
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
 from .models import Note
-from notebookapp.db import *
 
 def homePageView(request):
 	notes = []
@@ -15,6 +15,7 @@ def homePageView(request):
 	return render(request, 'pages/index.html', {'notes': notes})
 
 @login_required
+@csrf_protect
 def addView(request):
 	new_note = request.POST.get('note')
 	print(new_note)
